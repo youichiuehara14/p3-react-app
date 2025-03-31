@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
 import { useState } from 'react';
+import YownDrinkLogo from '../assets/YownDrinkLogo.png';
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,8 +12,8 @@ const NavigationBar = () => {
           <div className="logo">
             <NavLink to="/">
               <img
-                src="./YownDrinkLogo.png"
-                alt=""
+                src={YownDrinkLogo}
+                alt="Yown Drink Logo"
                 className=" w-[140px] sm:w-[200px] lg:w-[200px]"
               />
             </NavLink>
