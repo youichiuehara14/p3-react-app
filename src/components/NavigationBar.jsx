@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
 import { useState } from 'react';
-import YownDrinkLogo from './assets/YownDrinkLogo.png';
+import YownDrinkLogo from '../assets/YownDrinkLogo.png';
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
