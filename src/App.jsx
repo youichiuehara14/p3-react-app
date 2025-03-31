@@ -11,7 +11,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/p3-react-app" element={<HomePage />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/ContactUs" element={<ContactUs />} />
