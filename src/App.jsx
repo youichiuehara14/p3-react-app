@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { HashRouter, Routes, Route } from 'react-router';
 import AboutPage from './pages/AboutPage';
 import ContactUs from './pages/ContactUs';
 import AppPage from './pages/AppPage';
@@ -9,7 +9,7 @@ import HomePage from './pages/HomePage';
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/p3-react-app" element={<HomePage />} />
           <Route path="*" element={<PageNotFound />} />
@@ -17,7 +17,7 @@ function App() {
           <Route path="/ContactUs" element={<ContactUs />} />
           <Route path="/App" element={<AppPage />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
