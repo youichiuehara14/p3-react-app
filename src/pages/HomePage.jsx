@@ -1,8 +1,6 @@
 import Hero from '../components/Hero';
 import NavigationBar from '../components/NavigationBar';
-import BgGradientBall from '../components/BgGradientBall';
 import About from '../components/About';
-import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 import RandomCards from '../components/RandomCards';
 const HomePage = () => {
@@ -16,7 +14,6 @@ const HomePage = () => {
           <div>
             <Hero />
           </div>
-
           <div id="aboutSection">
             <About />
           </div>

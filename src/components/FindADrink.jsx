@@ -19,7 +19,7 @@ const FindADrink = () => {
   // when component with api is loaded, it doesnt need to render immediately
   // when surprise me button is clicked, it generates a random searchDrinkResult
 
-  const [Card, setCard] = useState(false);
+  const [card, setCard] = useState(false);
 
   const generateRandomDrink = async () => {
     try {
@@ -34,6 +34,7 @@ const FindADrink = () => {
   };
 
   const generateSearch = async () => {
+    setCard(true);
     if (!search.searchInput) {
       return;
     }
@@ -87,17 +88,20 @@ const FindADrink = () => {
   };
 
   const renderDrinkCards = () => {
-    if (searchDrinkResult.length === 0) {
-      return (
-        <div className="text-center text-red-500 font-semibold mt-5">Sorry, no drink found.</div>
-      );
+    if (card) {
+      if (searchDrinkResult.length === 0) {
+        return (
+          <div className={`text-center text-red-500 font-semibold mt-5`}>
+            Sorry, no drink found.
+          </div>
+        );
+      }
     }
-
     return searchDrinkResult.map((drink) => (
       <article
         key={drink.idDrink}
         className={` ${
-          Card
+          card
             ? 'flex flex-col md:flex-row items-center  text-black bg-white mt-5 mb-10 px-8 py-10 '
             : 'hidden'
         } `}
