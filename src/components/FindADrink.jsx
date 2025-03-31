@@ -180,7 +180,7 @@ const FindADrink = () => {
 
         <div
           className={`gap-5 mx-auto  ${
-            search.searchType ? 'flex opacity-100' : ' hidden   opacity-0'
+            search.searchType === 'name' ? 'flex opacity-100' : ' hidden   opacity-0'
           }`}
         >
           <button

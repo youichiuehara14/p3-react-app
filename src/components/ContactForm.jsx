@@ -8,11 +8,32 @@ const ContactForm = () => {
     category: '',
   });
 
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+    if (!userData.name.trim()) newErrors.name = 'Name is required.';
+    if (!userData.email.trim()) {
+      newErrors.email = 'Email is required.';
+    } else if (!/\S+@\S+\.\S+/.test(userData.email)) {
+      newErrors.email = 'Email is invalid.';
+    }
+    if (!userData.message.trim()) newErrors.message = 'Message is required.';
+    if (!userData.category) newErrors.category = 'Please select a category.';
+    return newErrors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+    setErrors({});
     console.log('Form submitted:', userData);
   };
+
   const handleInputChange = (e) => {
     setUserData((currData) => {
       return { ...currData, [e.target.name]: e.target.value };
@@ -34,7 +55,7 @@ const ContactForm = () => {
             <select
               name="category"
               id="category"
-              className=" p-2 mb-4 w-full focus:outline-none  border-1 text-white  bg-[#171717] border-[#5a5a5a] "
+              className="p-2 mb-4 w-full focus:outline-none border-1 text-white bg-[#171717] border-[#5a5a5a]"
               onChange={handleInputChange}
             >
               <option value="">Select Your Concern</option>
@@ -42,6 +63,8 @@ const ContactForm = () => {
               <option value="inquiry">Inquiry</option>
               <option value="others">Others</option>
             </select>
+            {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
+
             <label htmlFor="name" className="text-[#cecece]">
               Your Name
             </label>
@@ -49,37 +72,41 @@ const ContactForm = () => {
               type="text"
               id="name"
               name="name"
-              className="focus:outline-none  text-white  border-[#5a5a5a] border-b-1 p-2 mb-4 w-full"
+              className="focus:outline-none text-white border-[#5a5a5a] border-b-1 p-2 mb-4 w-full"
               value={userData.name}
               onChange={handleInputChange}
               placeholder="Enter your name..."
             />
+            {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+
             <label htmlFor="email">Your Email</label>
             <input
               type="email"
               id="email"
               name="email"
               placeholder="Enter your Email..."
-              className="focus:outline-none   text-white  border-[#5a5a5a] border-b-1 p-2 mb-4 w-full"
+              className="focus:outline-none text-white border-[#5a5a5a] border-b-1 p-2 mb-4 w-full"
               value={userData.email}
               onChange={handleInputChange}
             />
+            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
             <label htmlFor="message">Your Message</label>
             <textarea
               name="message"
               id="message"
               placeholder="Type your message here..."
-              className="focus:outline-none  text-white  border-[#5a5a5a]  border-1  p-2 mb-4 w-full h-32"
+              className="focus:outline-none text-white border-[#5a5a5a] border-1 p-2 mb-4 w-full h-32"
               value={userData.message}
               onChange={handleInputChange}
             ></textarea>
-            <button className="bg-orange-500 text-white px-4 py-2 rounded ">Send Message</button>
+            {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
+
+            <button className="bg-orange-500 text-white px-4 py-2 rounded">Send Message</button>
           </form>
         </div>
-        {/* <div className="flex w-full text-center items-center gap-5 h-full bg-[url(/cocktail.jpg)]  bg-cover  bg-no-repeat bg-center"> */}
-        <div className="flex text-center items-center gap-5   bg-cover ">
-          <div className="hidden lg:inline-flex flex-col  gap-5 w-5/6 mx-auto p-5 bg-gray-0 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border border-[#838383] ">
+        <div className="flex text-center items-center gap-5 bg-cover ">
+          <div className="hidden lg:inline-flex flex-col gap-5 w-5/6 mx-auto p-5 bg-gray-0 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border border-[#838383] ">
             <p className="text-lg font-primary ">
               We would love to hear from you! Whether you have questions, feedback, or any
               inquiries, feel free to reach out. Please fill out the form below, and our team will
@@ -91,7 +118,7 @@ const ContactForm = () => {
             </span>
           </div>
         </div>
-        <div className="flex flex-col gap-5 lg:hidden w-full  p-5 bg-gray-0 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border border-[#838383] ">
+        <div className="flex flex-col gap-5 lg:hidden w-full p-5 bg-gray-0 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border border-[#838383] ">
           <h2 className="text-2xl">Directly Contact us here!</h2>
           <span className="font-secondary">
             <i className="bx bx-envelope "></i>
