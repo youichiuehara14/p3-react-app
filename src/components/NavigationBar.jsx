@@ -12,7 +12,7 @@ const NavigationBar = () => {
           <div className="logo">
             <NavLink to="/">
               <img
-                src={`${import.meta.env.BASE_URL}YownDrinkLogo.png`}
+                src={YownDrinkLogo}
                 alt="Yown Drink Logo"
                 className=" w-[140px] sm:w-[200px] lg:w-[200px]"
               />
