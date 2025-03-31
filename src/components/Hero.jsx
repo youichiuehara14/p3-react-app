@@ -1,6 +1,5 @@
-import heroImg from '../assets/heroImg.png';
-
 const Hero = () => {
+  const heroImg = `${import.meta.env.BASE_URL}heroImg.png`;
   return (
     <section className="flex h-3/4 w-screen items-start justify-center pt-15  text-white ">
       <div className="flex flex-col md:flex-row max-w-8/9 items-center ">
