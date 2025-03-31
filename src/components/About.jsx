@@ -6,7 +6,7 @@ const About = () => {
       <div className=" flex md:flex-row-reverse flex-col max-w-8/9 items-center gap-10">
         <figure className="flex-1 justify-center md:block">
           <img
-            src="aboutimg.png"
+            src="/aboutimg.png"
             alt="Cocktail"
             className="mx-auto h-auto object-contain sm:w-[500px]  md:w-[400px] xl:w-[500px]"
           />
