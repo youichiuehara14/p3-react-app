@@ -31,6 +31,7 @@ const ContactForm = () => {
       return;
     }
     setErrors({});
+    alert('Your form has been submitted successfully!');
     console.log('Form submitted:', userData);
   };
 

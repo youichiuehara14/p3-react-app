@@ -1,6 +1,5 @@
 import React from 'react';
 import NavigationBar from '../components/NavigationBar';
-
 import Footer from '../components/Footer';
 import FindADrink from '../components/findadrink';
 

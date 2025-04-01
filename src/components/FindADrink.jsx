@@ -16,9 +16,6 @@ const FindADrink = () => {
 
   const [search, setSearch] = useState(initialState);
 
-  // when component with api is loaded, it doesnt need to render immediately
-  // when surprise me button is clicked, it generates a random searchDrinkResult
-
   const [card, setCard] = useState(false);
 
   const generateRandomDrink = async () => {
@@ -123,8 +120,14 @@ const FindADrink = () => {
           <span className="font-semibold border-1 self-start px-2 text-white bg-[#171717]">
             {drink.strAlcoholic}
           </span>
-          <h2 className="md:text-4xl font-secondary font-semibold mb-2 ">Ingredients</h2>
-          <ul className="mb-5 grid grid-rows-2 grid-flow-col">
+          <h2
+            className={`${
+              !drink.searchType === 'name' ? 'block' : 'hidden'
+            } md:text-4xl font-secondary font-semibold mb-2 `}
+          >
+            Ingredients
+          </h2>
+          <ul className={`mb-5 grid-rows-2 grid-flow-col`}>
             {Object.keys(drink)
               .filter((key) => key.includes('strIngredient') && drink[key])
               .map((ingredient) => (
@@ -133,7 +136,13 @@ const FindADrink = () => {
                 </li>
               ))}
           </ul>
-          <h3 className="md:text-4xl font-secondary font-semibold">Instructions</h3>
+          <h3
+            className={`${
+              !drink.searchType === 'name' ? 'block' : 'hidden'
+            } md:text-4xl font-secondary font-semibold`}
+          >
+            Instructions
+          </h3>
           <p className="font-secondary text-sm">{drink.strInstructions}</p>
         </div>
       </article>

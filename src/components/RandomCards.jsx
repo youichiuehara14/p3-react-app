@@ -30,6 +30,7 @@ const RandomCards = () => {
           <span className="lg:text-md  text-sm font-semibold border-1 self-start px-2 text-white bg-[#171717]">
             {randomDrink.strAlcoholic}
           </span>
+          <h3 className="text-2xl font-semibold">Ingredients</h3>
           <ul className="ml-5 grid xl:grid-cols-4 lg:grid-cols-1 grid-rows-2 ">
             {Object.keys(randomDrink)
               .filter((key) => key.includes('strIngredient') && randomDrink[key])
