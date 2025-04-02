@@ -15,10 +15,13 @@ const FindADrink = () => {
   const [card, setCard] = useState(false);
 
   const getLocalStorage = () => {
-    setCard(true);
     const data = JSON.parse(localStorage.getItem('searchDrinkResult'));
-    if (!data) return [];
-    return data;
+    if (!data) {
+      return;
+    } else if (data) {
+      setCard(true);
+      return data;
+    }
   };
   const [search, setSearch] = useState(initialState);
   const [searchDrinkResult, setSearchDrinkResult] = useState(getLocalStorage);
@@ -31,7 +34,6 @@ const FindADrink = () => {
     try {
       const response = await fetch(`${urlSearchRandom}`);
       const jsonData = await response.json();
-      console.log(jsonData);
       setSearchDrinkResult(jsonData.drinks);
       setCard(true);
       localStorage.setItem('searchDrinkResult', JSON.stringify(jsonData.drinks));
@@ -75,7 +77,6 @@ const FindADrink = () => {
           setSearchDrinkResult([]);
           return;
         }
-
         setSearchDrinkResult(jsonData.drinks);
         setCard(true);
       } catch (error) {
@@ -95,8 +96,8 @@ const FindADrink = () => {
   };
 
   const renderDrinkCards = () => {
-    if (card) {
-      if (searchDrinkResult.length === 0) {
+    if (card && searchDrinkResult.length === 0) {
+      {
         return (
           <div className={`text-center text-red-500 font-semibold mt-5`}>
             Sorry, no drink found.

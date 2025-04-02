@@ -9,7 +9,6 @@ const HomePage = () => {
     <>
       <div className="min-h-screen flex flex-col   ">
         <div className="">
-          <AnnouncementBar />
           <div>
             <NavigationBar />
           </div>

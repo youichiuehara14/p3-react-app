@@ -9,7 +9,6 @@ import HomePage from './pages/HomePage';
 function App() {
   return (
     <div>
-      {/* <Router basename="/p3-react-app"> */}
       <Router basename="/p3-react-app">
         <Routes>
           <Route path="/" element={<HomePage />} />
