@@ -40,7 +40,10 @@ const RandomCards = () => {
                 </li>
               ))}
           </ul>
-          <h3>Want to learn and discover more about other drinks and how to make it?</h3>
+          <p>
+            Want to learn and discover more about other drinks and how to make it? Proceed to the
+            App to find out!
+          </p>
         </div>
 
         <Link className="flex flex-col items-center justify-center" to="/App">

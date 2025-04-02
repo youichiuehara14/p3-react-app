@@ -14,7 +14,7 @@ const AboutButtons = () => {
     }
   };
 
-  const [state, dispatch] = useReducer(reducer, '');
+  const [_, dispatch] = useReducer(reducer, '');
 
   const redirectToGitHub = () => {
     dispatch({ type: 'github', link: 'https://github.com/youichiuehara14' });

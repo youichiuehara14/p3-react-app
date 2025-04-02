@@ -1,38 +1,39 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const ContactForm = () => {
-  const [userData, setUserData] = useState({
+  const emptyUserData = {
     name: '',
     email: '',
     message: '',
     category: '',
-  });
+  };
+
+  const [userData, setUserData] = useState(emptyUserData);
 
   const [errors, setErrors] = useState({});
 
   const validate = () => {
-    const newErrors = {};
-    if (!userData.name.trim()) newErrors.name = 'Name is required.';
+    const errors = {};
+    if (!userData.name.trim()) errors.name = 'Name is required.';
     if (!userData.email.trim()) {
-      newErrors.email = 'Email is required.';
+      errors.email = 'Email is required.';
     } else if (!/\S+@\S+\.\S+/.test(userData.email)) {
-      newErrors.email = 'Email is invalid.';
+      errors.email = 'Email is invalid.';
     }
-    if (!userData.message.trim()) newErrors.message = 'Message is required.';
-    if (!userData.category) newErrors.category = 'Please select a category.';
-    return newErrors;
+    if (!userData.message.trim()) errors.message = 'Message is required.';
+    if (!userData.category) errors.category = 'Please select a category.';
+    return errors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+    if (Object.keys(validate()).length > 0) {
+      setErrors(validate());
       return;
     }
     setErrors({});
     alert('Your form has been submitted successfully!');
-    console.log('Form submitted:', userData);
+    setUserData(emptyUserData);
   };
 
   const handleInputChange = (e) => {
@@ -58,6 +59,7 @@ const ContactForm = () => {
               id="category"
               className="p-2 mb-4 w-full focus:outline-none border-1 text-white bg-[#171717] border-[#5a5a5a]"
               onChange={handleInputChange}
+              value={userData.category}
             >
               <option value="">Select Your Concern</option>
               <option value="feedback">Feedback</option>

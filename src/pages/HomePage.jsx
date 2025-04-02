@@ -3,11 +3,13 @@ import NavigationBar from '../components/NavigationBar';
 import About from '../components/About';
 import Footer from '../components/Footer';
 import RandomCards from '../components/RandomCards';
+import AnnouncementBar from '../components/AnnouncementBar';
 const HomePage = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col   ">
         <div className="">
+          <AnnouncementBar />
           <div>
             <NavigationBar />
           </div>

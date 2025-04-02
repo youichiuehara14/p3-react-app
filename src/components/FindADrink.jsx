@@ -1,12 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const urlName = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const urlSearchByIngredient = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const urlSearchRandom = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 const urlSearchById = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 
 const FindADrink = () => {
-  const [searchDrinkResult, setSearchDrinkResult] = useState([]);
-
   const initialState = {
     searchInput: '',
     searchType: '',
@@ -14,9 +12,20 @@ const FindADrink = () => {
     card: false,
   };
 
-  const [search, setSearch] = useState(initialState);
-
   const [card, setCard] = useState(false);
+
+  const getLocalStorage = () => {
+    setCard(true);
+    const data = JSON.parse(localStorage.getItem('searchDrinkResult'));
+    if (!data) return [];
+    return data;
+  };
+  const [search, setSearch] = useState(initialState);
+  const [searchDrinkResult, setSearchDrinkResult] = useState(getLocalStorage);
+
+  useEffect(() => {
+    localStorage.setItem('searchDrinkResult', JSON.stringify(searchDrinkResult));
+  }, [searchDrinkResult]);
 
   const generateRandomDrink = async () => {
     try {
@@ -25,6 +34,7 @@ const FindADrink = () => {
       console.log(jsonData);
       setSearchDrinkResult(jsonData.drinks);
       setCard(true);
+      localStorage.setItem('searchDrinkResult', JSON.stringify(jsonData.drinks));
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +71,7 @@ const FindADrink = () => {
       try {
         const response = await fetch(`${urlSearchByIngredient}${search.searchInput}`);
         const jsonData = await response.json();
-        if (!jsonData.drinks) {
+        if (jsonData.drinks && typeof jsonData.drinks === 'string') {
           setSearchDrinkResult([]);
           return;
         }
@@ -102,9 +112,6 @@ const FindADrink = () => {
             ? 'flex flex-col md:flex-row items-center  text-black bg-white mt-5 mb-10 px-8 py-10 '
             : 'hidden'
         } `}
-        onClick={() => {
-          getDrinkFullDetails(drink.idDrink);
-        }}
       >
         <div className="max-w-full">
           <img
@@ -113,8 +120,8 @@ const FindADrink = () => {
             className="max-w-[250px] max-h-[250px] sm:max-w-[350px] sm:max-h-[350px] md:max-w-[300px] md:max-h-[300px] py-5 object-cover  border-amber-600"
           />
         </div>
-        <div className="flex flex-col pt-5 sm:pl-10 h-full cursor-pointer">
-          <h1 className="text-4xl sm:text-5xl  lg:text-6xl  font-secondary font-semibold mb-2">
+        <div className="flex flex-col pt-5 sm:pl-10 h-full">
+          <h1 className="text-4xl sm:text-5xl  lg:text-6xl  font-secondary font-semibold mb-2 text-center sm:text-left">
             {drink.strDrink}
           </h1>
           <span className="font-semibold border-1 self-start px-2 text-white bg-[#171717]">
@@ -122,7 +129,7 @@ const FindADrink = () => {
           </span>
           <h2
             className={`${
-              !drink.searchType === 'name' ? 'block' : 'hidden'
+              drink.strInstructions ? 'block' : 'hidden'
             } md:text-4xl font-secondary font-semibold mb-2 `}
           >
             Ingredients
@@ -138,12 +145,22 @@ const FindADrink = () => {
           </ul>
           <h3
             className={`${
-              !drink.searchType === 'name' ? 'block' : 'hidden'
+              drink.strInstructions ? 'block' : 'hidden'
             } md:text-4xl font-secondary font-semibold`}
           >
             Instructions
           </h3>
           <p className="font-secondary text-sm">{drink.strInstructions}</p>
+          <button
+            className={`${
+              drink.strInstructions ? 'hidden' : 'block'
+            }  bg-[#171717] text-white font-semibold border-1 max-w-60 text-sm px-1 py-2`}
+            onClick={() => {
+              getDrinkFullDetails(drink.idDrink);
+            }}
+          >
+            Click to find out the full details!
+          </button>
         </div>
       </article>
     ));
