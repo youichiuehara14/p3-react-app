@@ -1,5 +1,5 @@
 import AboutButtons from './AboutButtons';
-import aboutimg from '../assets/aboutimg.png';
+import aboutDrinkGraphic from '../assets/about-drink-graphic.png';
 
 const About = () => {
   return (
@@ -7,13 +7,13 @@ const About = () => {
       <div className=" flex md:flex-row-reverse flex-col max-w-8/9 items-center gap-10">
         <figure className="flex-1 justify-center md:block">
           <img
-            src={aboutimg}
+            src={aboutDrinkGraphic}
             alt="Cocktail"
             className="mx-auto h-auto object-contain sm:w-[500px]  md:w-[400px] xl:w-[500px]"
           />
         </figure>
 
-        <article className="flex  flex-col gap-4 flex-1 self-start text-center md:text-left">
+        <article className="flex flex-col gap-4 flex-1 self-start text-center md:text-left">
           <header>
             <h1 className="justify-self-center font-secondary text-4xl sm:text-5xl md:justify-self-start md:text-4xl lg:text-5xl xl:text-7xl">
               About

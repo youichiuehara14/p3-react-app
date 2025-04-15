@@ -6,14 +6,14 @@ import FindADrink from '../components/FindADrink';
 const AppPage = () => {
   return (
     <>
-      <div className="h-screen flex flex-col h ">
+      <div className="h-screen flex flex-col">
         <div className="">
           <NavigationBar />
         </div>
         <div>
           <FindADrink />
         </div>
-        <div className="mt-auto py-3  border-t-1   border-[#5c5c5c] shadow-2xl shadow-[#ffcab5]  ">
+        <div className="mt-auto py-3  border-t-1 border-[#5c5c5c] shadow-2xl shadow-[#ffcab5]  ">
           <div className="max-w-10/11 mx-auto ">
             <Footer />
           </div>

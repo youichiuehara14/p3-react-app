@@ -12,8 +12,8 @@ const ContactUs = () => {
         <div>
           <ContactForm />
         </div>
-        <div className=" py-3 border-t-1  mt-auto  border-[#5c5c5c] shadow-2xl shadow-[#ffcab5]">
-          <div className="max-w-10/11 mx-auto  ">
+        <div className="py-3 border-t-1 mt-auto border-[#5c5c5c] shadow-2xl shadow-[#ffcab5]">
+          <div className="max-w-10/11 mx-auto">
             <Footer />
           </div>
         </div>

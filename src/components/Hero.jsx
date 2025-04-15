@@ -1,4 +1,4 @@
-import heroImg from '../assets/heroImg.png';
+import heroDrinkGraphic from '../assets/hero-drink-graphic.png';
 
 const Hero = () => {
   return (
@@ -6,7 +6,7 @@ const Hero = () => {
       <div className="flex flex-col md:flex-row max-w-8/9 items-center ">
         <figure className=" flex-1 justify-center md:block pb-5">
           <img
-            src={heroImg}
+            src={heroDrinkGraphic}
             alt="Cocktail"
             className="mx-auto h-auto object-contain w-[300px] sm:w-[300px] md:w-[300px] lg:w-[400px] xl:w-[500px]"
           />
