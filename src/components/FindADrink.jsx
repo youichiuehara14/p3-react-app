@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import { useState } from 'react';
 const urlName = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const urlSearchByIngredient = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const urlSearchRandom = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
@@ -25,9 +26,9 @@ const FindADrink = () => {
   const [search, setSearch] = useState(initialState);
   const [searchDrinkResult, setSearchDrinkResult] = useState(getLocalStorage);
 
-  useEffect(() => {
-    localStorage.setItem('searchDrinkResult', JSON.stringify(searchDrinkResult));
-  }, [searchDrinkResult]);
+  // useEffect(() => {
+  //   localStorage.setItem('searchDrinkResult', JSON.stringify(searchDrinkResult));
+  // }, [searchDrinkResult]);
 
   const generateRandomDrink = async () => {
     try {
