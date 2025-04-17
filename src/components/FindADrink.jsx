@@ -23,8 +23,9 @@ const FindADrink = () => {
       return data;
     }
   };
+
   const [search, setSearch] = useState(initialState);
-  const [searchDrinkResult, setSearchDrinkResult] = useState(getLocalStorage);
+  const [searchDrinkResult, setSearchDrinkResult] = useState(() => getLocalStorage());
 
   // useEffect(() => {
   //   localStorage.setItem('searchDrinkResult', JSON.stringify(searchDrinkResult));
