@@ -174,7 +174,8 @@ const FindADrink = () => {
 
   return (
     <>
-      <section className="w-screen flex sm:flex-col flex-col-reverse sm:items-center gap-1 mt-5 ">
+      {/* <section className="w-screen flex sm:flex-col flex-col-reverse sm:items-center gap-1 mt-5 "> */}
+      <section className="w-full flex flex-col-reverse sm:flex-col sm:items-center gap-1 mt-5 px-4">
         <form
           className="flex sm:flex-row sm:justify-center sm:gap-0 mx-10 p-5 rounded-md gap-2 flex-col"
           onSubmit={(e) => e.preventDefault()}
