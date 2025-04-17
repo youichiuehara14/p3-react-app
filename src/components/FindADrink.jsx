@@ -1,5 +1,5 @@
-// import { useEffect, useState } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+// import { useState } from 'react';
 const urlName = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const urlSearchByIngredient = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const urlSearchRandom = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
@@ -14,22 +14,17 @@ const FindADrink = () => {
 
   const [card, setCard] = useState(false);
 
-  // const getLocalStorage = () => {
-  //   const data = JSON.parse(localStorage.getItem('searchDrinkResult'));
-  //   if (!data) {
-  //     return;
-  //   } else if (data) {
-  //     setCard(true);
-  //     return data;
-  //   }
-  // };
+  const getLocalStorage = () => {
+    const data = JSON.parse(localStorage.getItem('searchDrinkResult'));
+    return data || [];
+  };
 
   const [search, setSearch] = useState(initialState);
-  const [searchDrinkResult, setSearchDrinkResult] = useState([]);
+  const [searchDrinkResult, setSearchDrinkResult] = useState(getLocalStorage);
 
-  // useEffect(() => {
-  //   localStorage.setItem('searchDrinkResult', JSON.stringify(searchDrinkResult));
-  // }, [searchDrinkResult]);
+  useEffect(() => {
+    localStorage.setItem('searchDrinkResult', JSON.stringify(searchDrinkResult));
+  }, [searchDrinkResult]);
 
   const generateRandomDrink = async () => {
     try {
