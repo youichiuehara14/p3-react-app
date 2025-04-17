@@ -1,11 +1,11 @@
 import NavigationBar from '../components/NavigationBar';
-import Footer from '../components/Footer';
+// import Footer from '../components/Footer';
 import FindADrink from '../components/FindADrink';
 
 const AppPage = () => {
   return (
     <>
-      <div className="h-screen flex flex-col">
+      <div className="flex flex-col">
         <NavigationBar />
 
         <FindADrink />
