@@ -6,13 +6,10 @@ const AppPage = () => {
   return (
     <>
       <div className="h-screen flex flex-col">
-        <h1 className="text-5xl">Hotdog</h1>
-        {/* <div>
-          <NavigationBar />
-        </div>
-        <div>
-          <FindADrink />
-        </div>
+        <NavigationBar />
+
+        <FindADrink />
+        {/* 
         <div className="mt-auto py-3  border-t-1 border-[#5c5c5c] shadow-2xl shadow-[#ffcab5]  ">
           <div className="max-w-10/11 mx-auto ">
             <Footer />
