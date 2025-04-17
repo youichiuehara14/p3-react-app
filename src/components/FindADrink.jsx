@@ -14,13 +14,18 @@ const FindADrink = () => {
 
   const [card, setCard] = useState(false);
 
-  const getLocalStorage = () => {
+  useEffect(() => {
     const data = JSON.parse(localStorage.getItem('searchDrinkResult'));
-    return data || [];
-  };
+    setSearchDrinkResult(data);
+  }, []);
+
+  // const getLocalStorage = () => {
+  //   const data = JSON.parse(localStorage.getItem('searchDrinkResult'));
+  //   return data || [];
+  // };
 
   const [search, setSearch] = useState(initialState);
-  const [searchDrinkResult, setSearchDrinkResult] = useState(getLocalStorage);
+  const [searchDrinkResult, setSearchDrinkResult] = useState([]);
 
   useEffect(() => {
     localStorage.setItem('searchDrinkResult', JSON.stringify(searchDrinkResult));
