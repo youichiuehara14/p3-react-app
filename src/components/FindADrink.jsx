@@ -83,9 +83,7 @@ const FindADrink = () => {
   };
 
   const conditionalStyles = {
-    cardStyles: card
-      ? 'flex flex-col md:flex-row items-center text-black bg-white mt-5 mb-10 px-8 py-10'
-      : 'hidden',
+    cardStyles: card ? 'flex' : 'hidden',
     alcoholicButtonVisibility: search.searchType === 'name' ? 'flex' : 'hidden',
     isAlcoholicButtonStyles: search.isAlcoholic
       ? `duration-300 border-none rounded-md bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br  shadow-orange-900/90 dark:shadow-xl dark:shadow-orange-800/50`
@@ -120,7 +118,10 @@ const FindADrink = () => {
           isNotVisible: drink.strInstructions ? 'hidden' : 'block',
         };
         return (
-          <article key={drink.idDrink} className={`${conditionalStyles.cardStyles}`}>
+          <article
+            key={drink.idDrink}
+            className={`${conditionalStyles.cardStyles} flex-col md:flex-row items-center text-black bg-white mt-5 mb-10 px-8 py-10`}
+          >
             <div className="max-w-full">
               <img
                 src={drink.strDrinkThumb}
