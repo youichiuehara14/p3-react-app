@@ -6,7 +6,8 @@ const AppPage = () => {
   return (
     <>
       <div className="h-screen flex flex-col">
-        <div>
+        <h1 className="text-5xl">Hotdog</h1>
+        {/* <div>
           <NavigationBar />
         </div>
         <div>
@@ -16,7 +17,7 @@ const AppPage = () => {
           <div className="max-w-10/11 mx-auto ">
             <Footer />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
