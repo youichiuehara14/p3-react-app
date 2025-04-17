@@ -21,7 +21,7 @@ const HomePage = () => {
             <RandomCards />
           </div>
         </div>
-        <div className=" py-3 border-t-1 mt-5  border-[#5c5c5c] shadow-2xl shadow-[#ffcab5] bg-[#171717]">
+        <div className="py-3 border-t-1 mt-5  border-[#5c5c5c] shadow-2xl shadow-[#ffcab5] bg-[#171717]">
           <div className="max-w-10/11 mx-auto">
             <Footer />
           </div>
