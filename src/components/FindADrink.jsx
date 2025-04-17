@@ -13,23 +13,18 @@ const FindADrink = () => {
   };
 
   const [card, setCard] = useState(false);
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('searchDrinkResult'));
-    setSearchDrinkResult(data);
-  }, []);
-
-  // const getLocalStorage = () => {
-  //   const data = JSON.parse(localStorage.getItem('searchDrinkResult'));
-  //   return data || [];
-  // };
-
   const [search, setSearch] = useState(initialState);
   const [searchDrinkResult, setSearchDrinkResult] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem('searchDrinkResult', JSON.stringify(searchDrinkResult));
-  }, [searchDrinkResult]);
+    const data = JSON.parse(localStorage.getItem('searchDrinkResult'));
+    if (data) {
+      setSearchDrinkResult(data);
+      setCard(true);
+    } else {
+      setSearchDrinkResult([]);
+    }
+  }, []);
 
   const generateRandomDrink = async () => {
     try {
@@ -62,7 +57,7 @@ const FindADrink = () => {
         const filteredDrinks = jsonData.drinks.filter(
           (drink) => drink.strAlcoholic === (search.isAlcoholic ? 'Alcoholic' : 'Non alcoholic')
         );
-
+        localStorage.setItem('searchDrinkResult', JSON.stringify(jsonData.drinks));
         setSearchDrinkResult(filteredDrinks);
         setCard(true);
       } catch (error) {
@@ -78,6 +73,7 @@ const FindADrink = () => {
           setSearchDrinkResult([]);
           return;
         }
+        localStorage.setItem('searchDrinkResult', JSON.stringify(jsonData.drinks));
         setSearchDrinkResult(jsonData.drinks);
         setCard(true);
       } catch (error) {
@@ -103,6 +99,7 @@ const FindADrink = () => {
     try {
       const response = await fetch(`${urlSearchById}${id}`);
       const jsonData = await response.json();
+      localStorage.setItem('searchDrinkResult', JSON.stringify(jsonData.drinks));
       setSearchDrinkResult(jsonData.drinks);
     } catch (error) {
       console.error(error);
@@ -176,7 +173,6 @@ const FindADrink = () => {
 
   return (
     <>
-      {/* <section className="w-screen flex sm:flex-col flex-col-reverse sm:items-center gap-1 mt-5 "> */}
       <section className="w-full flex flex-col-reverse sm:flex-col sm:items-center gap-1 mt-5 px-4">
         <form
           className="flex sm:flex-row sm:justify-center sm:gap-0 mx-10 p-5 rounded-md gap-2 flex-col"
