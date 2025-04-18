@@ -1,14 +1,13 @@
-import React from 'react';
 import useFindADrink from './useFindADrink';
 
 const FindADrink = () => {
   const {
     search,
     setSearch,
-    searchDrinkResult,
     card,
-    generateSearch,
+    searchDrinkResult,
     generateRandomDrink,
+    generateSearch,
     getDrinkFullDetails,
   } = useFindADrink();
 
@@ -23,7 +22,9 @@ const FindADrink = () => {
       : ' ',
   };
 
-  const noCardIsOpen = () => searchDrinkResult.length === 0;
+  const noCardIsOpen = () => {
+    return searchDrinkResult.length === 0;
+  };
 
   const renderDrinkCards = () => {
     return noCardIsOpen() ? (
@@ -102,12 +103,13 @@ const FindADrink = () => {
               setSearch({ ...search, searchType: e.target.value });
             }}
           >
-            <option value="">Select</option>
+            <option>Select</option>
             <option value="name">Name</option>
             <option value="ingredient">Ingredient</option>
           </select>
           <div className="border-1 flex items-center ">
             <i className="bx bx-search p-1 "></i>
+
             <input
               id="searchDrinkResult-search"
               type="text"

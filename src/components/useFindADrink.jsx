@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const urlName = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const urlSearchByIngredient = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
@@ -21,12 +21,14 @@ const useFindADrink = () => {
     if (data) {
       setSearchDrinkResult(data);
       setCard(true);
+    } else {
+      setSearchDrinkResult([]);
     }
   }, []);
 
   const generateRandomDrink = async () => {
     try {
-      const response = await fetch(urlSearchRandom);
+      const response = await fetch(`${urlSearchRandom}`);
       const jsonData = await response.json();
       setSearchDrinkResult(jsonData.drinks);
       setCard(true);
@@ -37,16 +39,15 @@ const useFindADrink = () => {
   };
 
   const generateSearch = async () => {
-    if (!search.searchInput) return;
-
     setCard(true);
+    if (!search.searchInput) {
+      return;
+    }
 
-    try {
-      let response, jsonData;
-
-      if (search.searchType === 'name') {
-        response = await fetch(`${urlName}${search.searchInput}`);
-        jsonData = await response.json();
+    if (search.searchType === 'name') {
+      try {
+        const response = await fetch(`${urlName}${search.searchInput}`);
+        const jsonData = await response.json();
 
         if (!jsonData.drinks) {
           setSearchDrinkResult([]);
@@ -56,18 +57,28 @@ const useFindADrink = () => {
         const filteredDrinks = jsonData.drinks.filter(
           (drink) => drink.strAlcoholic === (search.isAlcoholic ? 'Alcoholic' : 'Non alcoholic')
         );
+        localStorage.setItem('searchDrinkResult', JSON.stringify(jsonData.drinks));
         setSearchDrinkResult(filteredDrinks);
+        setCard(true);
+      } catch (error) {
+        console.error(error);
       }
+    }
 
-      if (search.searchType === 'ingredient') {
-        response = await fetch(`${urlSearchByIngredient}${search.searchInput}`);
-        jsonData = await response.json();
-        setSearchDrinkResult(jsonData.drinks || []);
+    if (search.searchType === 'ingredient') {
+      try {
+        const response = await fetch(`${urlSearchByIngredient}${search.searchInput}`);
+        const jsonData = await response.json();
+        if (jsonData.drinks && typeof jsonData.drinks === 'string') {
+          setSearchDrinkResult([]);
+          return;
+        }
+        localStorage.setItem('searchDrinkResult', JSON.stringify(jsonData.drinks));
+        setSearchDrinkResult(jsonData.drinks);
+        setCard(true);
+      } catch (error) {
+        console.error(error);
       }
-
-      localStorage.setItem('searchDrinkResult', JSON.stringify(jsonData.drinks));
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -75,8 +86,8 @@ const useFindADrink = () => {
     try {
       const response = await fetch(`${urlSearchById}${id}`);
       const jsonData = await response.json();
-      setSearchDrinkResult(jsonData.drinks);
       localStorage.setItem('searchDrinkResult', JSON.stringify(jsonData.drinks));
+      setSearchDrinkResult(jsonData.drinks);
     } catch (error) {
       console.error(error);
     }
@@ -86,10 +97,9 @@ const useFindADrink = () => {
     search,
     setSearch,
     card,
-    setCard,
     searchDrinkResult,
-    generateSearch,
     generateRandomDrink,
+    generateSearch,
     getDrinkFullDetails,
   };
 };
